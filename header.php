@@ -17,10 +17,6 @@
 			<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 		<![endif]-->
 
-		<script>var base = '<?php echo theme_url(); ?>';</script>
-		<script src="<?php echo asset_url('/js/zepto.js'); ?>"></script>
-		<script src="<?php echo theme_url('/js/main.js'); ?>"></script>
-
 	    <meta name="viewport" content="width=device-width">
 	    <meta name="generator" content="Anchor CMS">
 
@@ -31,13 +27,13 @@
 	    <meta property="og:site_name" content="<?php echo site_name(); ?>">
 	    <meta property="og:description" content="<?php echo site_description(); ?>">
 
-		<?php if(customised()): ?>
+		<?php if (customised()): ?>
 		    <!-- Custom CSS -->
     		<style><?php echo article_css(); ?></style>
 
     		<!--  Custom Javascript -->
     		<script><?php echo article_js(); ?></script>
-		<?php endif; ?>
+		<?php endif;?>
 	</head>
 	<body class="<?php echo body_class(); ?>">
 		<div class="main-wrap">
@@ -52,14 +48,15 @@
 					<aside>
 						<b>Categories</b>
 						<ul>
-						<?php while(categories()): 
-								if (category_count() > 0) { ?>
-							<li>
-								<a href="<?php echo category_url(); ?>" title="<?php echo category_description(); ?>">
-									<?php echo category_title(); ?> <span><?php echo category_count(); ?></span>
-								</a>
-							</li>
-						<?php } endwhile; ?>
+						<?php while (categories()):
+  if (category_count() > 0) {?>
+									<li>
+										<a href="<?php echo category_url(); ?>" title="<?php echo category_description(); ?>">
+											<?php echo category_title(); ?> <span><?php echo category_count(); ?></span>
+										</a>
+									</li>
+								<?php }
+endwhile;?>
 						</ul>
 					</aside>
 				</div>
@@ -70,15 +67,15 @@
 
 				<nav id="main" role="navigation">
 					<ul>
-						<?php if(has_menu_items()):
-							while(menu_items()): ?>
-						<li <?php echo (menu_active() ? 'class="active"' : ''); ?>>
-							<a href="<?php echo menu_url(); ?>" title="<?php echo menu_title(); ?>">
-								<?php echo menu_name(); ?>
-							</a>
-						</li>
-						<?php endwhile;
-							endif; ?>
+						<?php if (has_menu_items()):
+  while (menu_items()): ?>
+								<li <?php echo (menu_active() ? 'class="active"' : ''); ?>>
+									<a href="<?php echo menu_url(); ?>" title="<?php echo menu_title(); ?>">
+										<?php echo menu_name(); ?>
+									</a>
+								</li>
+								<?php endwhile;
+endif;?>
 						<li class="tray">
 							<a href="#tray" class="linky"><img src="<?php echo theme_url('img/categories.png'); ?>" alt="Categories" title="View my posts by category"></a>
 						</li>
