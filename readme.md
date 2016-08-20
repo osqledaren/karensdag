@@ -1,3 +1,3 @@
 # Kårens dag
 
-# Osqledaren x AnchorCMS
+# Osqledaren x AnchorCM

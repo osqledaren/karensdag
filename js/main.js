@@ -89,50 +89,49 @@ var LiveFeed = {
     var http = location.protocol;
     var slashes = http.concat("//");
     var host = slashes.concat(window.location.hostname);
-    var feed = slashes.concat(window.location.hostname) + '/feeds/rss';
+    //var feed = slashes.concat(window.location.hostname) + '/feeds/rss';
 
-    console.log('Listening for RSS updates on location: ' + feed);
+    var feed = 'http://karensdag.osqledaren.se/index.php/feeds/rss';
+
+    console.log
 
     $.notify({
       path : feed, //required
-      interval : 60,      //optional (number of seconds between requests, default is 60)
-      callback : function(json){
+      interval : 10,      //optional (number of seconds between requests, default is 60)
+      callback : function(){
 
-        var post = this.fetchPost();
-
-        if (post === null){
-          return;
-        }
-
-        this.append(post);
-        this.replaceFeatured(post);
-        this.newsFlash(); // trigger breaking news effect.
+        LiveFeed.getPosts(LiveFeed.fetchPost());
+        LiveFeed.replaceFeatured(LiveFeed.fetchPost(true));
+        LiveFeed.newsFlash(); // trigger breaking news effect.
 
       }, //optional (when new results are found they are sent to this function)
       initial : false     //optional (this just shows notifications on the first pass, by default this is true, and we wont see the difference)
     });
   },
 
-  fetchPost: function(){
+  getList: function(posts){
 
-    // Check if post exists on page (by searching DOM after element id/class) else return null
+    if(posts === undefined){
+      return;
+    }
 
-    var post = null;
 
-    return post;
-  },
 
-  append: function(){
     // Append a new section on top of current sections of posts.
   },
 
-  replaceFeatured: function(){
+  replaceFeatured: function(post){
+
+    if(post === undefined){
+      return;
+    }
+
     // Replace featured post with new post.
   },
 
   newsFlash: function(){
 
-  },
+  }
 }
 
 $(document).ready(function(){

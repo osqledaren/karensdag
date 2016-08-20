@@ -1,7 +1,7 @@
 /**
  * Notification JS
  * Creates Notifications
- * @author Andrew Dodson
+ * @author Andrew Dodson, Tedy Warsitha
  */
 
 (function($){
@@ -87,12 +87,15 @@
 
           $.getJSON("http://ajax.googleapis.com/ajax/services/feed/load?v=1.0&callback=?&q="+path, function(r){
 
+            var newPosts = true;
+
             // loop through the rss items
             $.each( r.responseData.feed.entries, function(){
 
               var s = this.link;
 
               if(guid.indexOf(s)>-1){
+                newPosts = false;
                 // dont do anything, ignore
                 return;
               }
@@ -103,9 +106,13 @@
 
               // If this is not the first pass them we need to trigger the notification
               if(!initial){
-                $.notify( "", this.title, this.contentSnippet, callback );
+                $.notify( "", this.title, this.contentSnippet, null );
               }
             });
+
+            if(newPosts){
+              callback();
+            }
 
             // is this the first pass?
             initial = false;

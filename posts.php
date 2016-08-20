@@ -1,10 +1,10 @@
-<?php theme_include('header'); ?>
+<?php theme_include('header');?>
 
 <section class="content">
 
-	<?php if(has_posts()): ?>
-		<ul class="items">
-			<?php posts(); ?>
+	<?php if (has_posts()): ?>
+		<ul id="posts" class="items">
+			<?php posts();?>
 			<li>
 				<article class="wrap">
 					<h1>
@@ -20,8 +20,8 @@
 					</footer>
 				</article>
 			</li>
-			<?php $i = 0; while(posts()): ?>
-			<?php $bg = sprintf('background: hsl(215, 28%%, %d%%);', round(((++$i / posts_per_page()) * 20) + 20)); ?>
+			<?php $i  = 0;while (posts()): ?>
+			<?php $bg = sprintf('background: hsl(215, 28%%, %d%%);', round(((++$i / posts_per_page()) * 20) + 20));?>
 			<li style="<?php echo $bg; ?>">
 				<article class="wrap">
 					<h2>
@@ -29,10 +29,10 @@
 					</h2>
 				</article>
 			</li>
-			<?php endwhile; ?>
+			<?php endwhile;?>
 		</ul>
 
-		<?php if(has_pagination()): ?>
+		<?php if (has_pagination()): ?>
 		<nav class="pagination">
 			<div class="wrap">
 				<div class="previous">
@@ -43,15 +43,15 @@
 				</div>
 			</div>
 		</nav>
-		<?php endif; ?>
+		<?php endif;?>
 
 	<?php else: ?>
 		<div class="wrap">
 			<h1>No posts yet!</h1>
 			<p>Looks like you have some writing to do!</p>
 		</div>
-	<?php endif; ?>
+	<?php endif;?>
 
 </section>
 
-<?php theme_include('footer'); ?>
+<?php theme_include('footer');?>
