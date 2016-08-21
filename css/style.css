@@ -75,20 +75,29 @@ h1 {
 
 #top {
   overflow: hidden;
-  padding: 20px 35px;
+  padding: 0 35px;
   background: #f05022;
-  border-bottom: 1px solid rgba(22, 36, 54, 0.1);
+  text-align: center;
+}
+
+#top #logo {
+  background-image: url("../img/logo.png");
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 40px;
+  height: 40px;
+  display: block;
+  margin: 10px auto;
 }
 
 #top a {
-  float: left;
   font-size: 13px;
   font-weight: 500;
   text-decoration: none;
-  color: #8895a7;
+  color: white;
 }
 
-#top #logo:hover,
 #top ul a:hover,
 #top ul .active a,
 .posts .items li:first-child h2 a:hover,
