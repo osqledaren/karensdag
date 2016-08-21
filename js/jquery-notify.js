@@ -82,40 +82,44 @@
           callback = o.callback,
           initial = o.initial;
 
-
         (function self(){
 
-          $.getJSON("http://ajax.googleapis.com/ajax/services/feed/load?v=1.0&callback=?&q="+path, function(r){
+          $.getFeed({
+            url: path,
+            success: function(r){
 
-            var newPosts = true;
+              console.log(r);
 
-            // loop through the rss items
-            $.each( r.responseData.feed.entries, function(){
+              var newPosts = false;
 
-              var s = this.link;
+              // loop through the rss items
+              $.each( r.items, function(){
 
-              if(guid.indexOf(s)>-1){
-                newPosts = false;
-                // dont do anything, ignore
-                return;
+                var s = this.link;
+
+                if(guid.indexOf(s)>-1){
+                  // dont do anything, ignore
+                  return;
+                }
+
+                // This is a new item
+                // add to the list of GUID's
+                newPosts = true;
+                guid.push(s);
+
+                // If this is not the first pass them we need to trigger the notification
+                if(!initial){
+                  $.notify( "", this.title, this.contentSnippet, null );
+                }
+              });
+
+              if(newPosts){
+                callback();
               }
 
-              // This is a new item
-              // add to the list of GUID's
-              guid.push(s);
-
-              // If this is not the first pass them we need to trigger the notification
-              if(!initial){
-                $.notify( "", this.title, this.contentSnippet, null );
-              }
-            });
-
-            if(newPosts){
-              callback();
+              // is this the first pass?
+              initial = false;
             }
-
-            // is this the first pass?
-            initial = false;
           });
 
           // call this again in one 60 seconds

@@ -89,47 +89,47 @@ var LiveFeed = {
     var http = location.protocol;
     var slashes = http.concat("//");
     var host = slashes.concat(window.location.hostname);
-    //var feed = slashes.concat(window.location.hostname) + '/feeds/rss';
-
-    var feed = 'http://karensdag.osqledaren.se/index.php/feeds/rss';
-
-    console.log
+    var feed = host + '/feeds/rss';
 
     $.notify({
       path : feed, //required
       interval : 10,      //optional (number of seconds between requests, default is 60)
       callback : function(){
 
-        LiveFeed.getPosts(LiveFeed.fetchPost());
-        LiveFeed.replaceFeatured(LiveFeed.fetchPost(true));
+
         LiveFeed.newsFlash(); // trigger breaking news effect.
+
+        setTimeout(function(){
+          LiveFeed.getList(host + '/themes/osqledaren/fetchpost.php');
+        }, 100);
+
 
       }, //optional (when new results are found they are sent to this function)
       initial : false     //optional (this just shows notifications on the first pass, by default this is true, and we wont see the difference)
     });
   },
 
-  getList: function(posts){
+  getList: function(endpoint){
 
-    if(posts === undefined){
-      return;
-    }
-
-
+    $.get(endpoint, function(data) {
+      $("#posts").replaceWith(data);
+    });
 
     // Append a new section on top of current sections of posts.
   },
 
-  replaceFeatured: function(post){
-
-    if(post === undefined){
-      return;
-    }
-
-    // Replace featured post with new post.
-  },
-
   newsFlash: function(){
+    $('#newsflash').addClass('active');
+    $('#newsflash').show();
+
+    setTimeout(function(){
+      $('#newsflash').removeClass('active');
+
+      setTimeout(function(){
+        $('#newsflash').hide();
+      }, 300);
+
+    }, 4000);
 
   }
 }
