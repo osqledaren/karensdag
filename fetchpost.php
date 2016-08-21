@@ -1,5 +1,7 @@
 <?php
 
+ini_set('display_errors', 'off');
+
 function ol_get_posts($single = false) {
   if (isset($_SERVER['HTTPS'])) {
     $protocol = ($_SERVER['HTTPS'] && $_SERVER['HTTPS'] != 'off') ? 'https' : 'http';
@@ -17,7 +19,9 @@ function ol_get_posts($single = false) {
   curl_close($ch);
 
   $dom = new DOMDocument();
+  libxml_use_internal_errors(true);
   $dom->loadHTML($data);
+  libxml_clear_errors();
   $xpath = new DOMXPath($dom);
   $id    = 'posts';
   $nodes = $xpath->query("//*[@id and contains(concat(' ', normalize-space(@id), ' '), ' $id ')]");
