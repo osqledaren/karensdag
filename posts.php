@@ -13,6 +13,9 @@
 
           <div class="content">
             <?php echo article_html(); ?>
+            <?php $image = article_custom_field('post_image');if (!empty($image)): ?>
+            <img src="<?php echo $image; ?>" />
+            <?php endif;?>
           </div>
 
           <footer>
@@ -29,6 +32,9 @@
           </h2>
           <div class="content">
             <?php echo article_html(); ?>
+            <?php $image = article_custom_field('post_image');if (!empty($image)): ?>
+            <img src="<?php echo $image; ?>" />
+            <?php endif;?>
           </div>
 
           <footer>
